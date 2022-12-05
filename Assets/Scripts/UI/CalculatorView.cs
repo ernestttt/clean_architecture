@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using Presenter;
+using System;
 
 namespace UI
 {
@@ -11,17 +8,16 @@ namespace UI
         [SerializeField] private CalculatorButton _button;
         [SerializeField] private CalculatorTextField _textField;
 
-        [Inject] private ICalculatorPresenter _presenter;
-
+        public event Action OnButtonClicked;
+        public event Action<string> OnLineChanged;
 
         private void Start()
         {
-            _button.ButtonClicked += _presenter.Calculate;
-            _textField.ValueChanged += line => _presenter.CalculatorLine = line;
-            _presenter.CalculatorLineUpdated += () => _textField.UpdateText(_presenter.CalculatorLine);
-
-            _textField.UpdateText(_presenter.CalculatorLine);
+            _button.ButtonClicked += () => OnButtonClicked?.Invoke(); // _presenter.Calculate;
+            _textField.ValueChanged += line => OnLineChanged?.Invoke(line); //_presenter.CalculatorLine = line;
         }
+
+        public void UpdateLine(string line) => _textField.UpdateText(line);
     }
 }
 

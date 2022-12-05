@@ -1,31 +1,44 @@
 using System;
 using UseCase;
 using Zenject;
+using UI;
 
 namespace Presenter
 {
-    public class CalculatorPresenter : ICalculatorPresenter, IInitializable, IDisposable
+    public class CalculatorPresenter : IInitializable, IDisposable
     {
-        public string CalculatorLine { get; set; }
-
-        public event Action CalculatorLineUpdated;
+        private string _calculatorLine; 
+        private string CalculatorLine 
+        {
+            get => _calculatorLine;
+            set
+            {
+                _calculatorLine = value;
+                _calculatorView?.UpdateLine(CalculatorLine);
+            }
+        }
 
         private ICalculatorUseCase _calculatorUseCase;
 
         private ISaveLoadUseCase _loadSaveUseCase;
+
+        private CalculatorView _calculatorView;
         
 
-        public CalculatorPresenter(ICalculatorUseCase calculatorUseCase, ISaveLoadUseCase loadSaveUseCase)
+        public CalculatorPresenter(ICalculatorUseCase calculatorUseCase, ISaveLoadUseCase loadSaveUseCase, CalculatorView calculatorView)
         {
             this._calculatorUseCase = calculatorUseCase;
             this._loadSaveUseCase = loadSaveUseCase;
+            this._calculatorView = calculatorView;
         }
-
 
         public void Initialize()
         {
             string loadedValue = _loadSaveUseCase.Load();
-            UpdateCalculatorLine(loadedValue);
+            CalculatorLine = loadedValue;
+
+            _calculatorView.OnButtonClicked += Calculate;
+            _calculatorView.OnLineChanged += (line) => CalculatorLine = line;
         }
 
         public void Dispose()
@@ -33,16 +46,10 @@ namespace Presenter
             _loadSaveUseCase.Save(CalculatorLine);
         }
 
-        public void Calculate()
+        private void Calculate()
         {
             string calculatedValue = _calculatorUseCase.Calculate(CalculatorLine);
-            UpdateCalculatorLine(calculatedValue);
-        }
-
-        private void UpdateCalculatorLine(string value)
-        {
-            CalculatorLine = value;
-            CalculatorLineUpdated?.Invoke();
+            CalculatorLine = calculatedValue;
         }
     }
 }
