@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-namespace UI
+namespace Presentation
 {
     [RequireComponent(typeof(Button))]
     public class CalculatorButton : MonoBehaviour

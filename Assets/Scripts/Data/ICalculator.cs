@@ -1,6 +1,6 @@
-namespace UseCase
+namespace Data
 {
-    public interface ICalculatorUseCase
+    public interface ICalculator
     {
         public string Calculate(string value);
     }

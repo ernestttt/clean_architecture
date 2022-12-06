@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveKey: save
   _pattern: \d+\+\d+
+  _calculatorView: {fileID: 4634911}
 --- !u!114 &414031582
 MonoBehaviour:
   m_ObjectHideFlags: 0

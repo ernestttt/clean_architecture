@@ -1,6 +1,6 @@
-namespace UseCase
+namespace Data
 {
-    public interface ISaveLoadUseCase
+    public interface IDataManager
     {
         public string Load();
         public void Save(string value);

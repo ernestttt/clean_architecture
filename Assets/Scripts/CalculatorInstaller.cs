@@ -1,9 +1,9 @@
 using UnityEngine;
 using Zenject;
-using Entities;
-using UseCase;
+using Data;
 using Presenter;
-using UI;
+using Presentation;
+
 
 public class CalculatorInstaller : MonoInstaller<CalculatorInstaller>
 {
@@ -13,12 +13,10 @@ public class CalculatorInstaller : MonoInstaller<CalculatorInstaller>
 
     public override void InstallBindings()
     {
-        var saveLoadEntity = new SaveLoadEntity();
-        var saveLoadUseCase = new SaveLoadUseCase(_saveKey, saveLoadEntity);
-        var calculatorEntity = new CalculatorEntity(_pattern);
-        var calculatorUseCase = new CalculatorUseCase(calculatorEntity);
+        var dataManager = new DataManager(_saveKey);
+        var calculator = new Data.Calculator(_pattern);
 
-        Container.BindInterfacesAndSelfTo<CalculatorPresenter>().AsSingle().WithArguments(calculatorUseCase, saveLoadUseCase, _calculatorView);
+        Container.BindInterfacesAndSelfTo<CalculatorPresenter>().AsSingle().WithArguments(calculator, dataManager, _calculatorView);
         
 
         SignalBusInstaller.Install(Container);

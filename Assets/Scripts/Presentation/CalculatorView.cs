@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace UI
+namespace Presentation
 {
     public class CalculatorView : MonoBehaviour
     {

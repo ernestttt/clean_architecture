@@ -1,7 +1,7 @@
 using System;
-using UseCase;
+using Data;
 using Zenject;
-using UI;
+using Presentation;
 
 namespace Presenter
 {
@@ -18,16 +18,16 @@ namespace Presenter
             }
         }
 
-        private ICalculatorUseCase _calculatorUseCase;
+        private ICalculator _calculator;
 
-        private ISaveLoadUseCase _loadSaveUseCase;
+        private IDataManager _loadSaveUseCase;
 
         private CalculatorView _calculatorView;
         
 
-        public CalculatorPresenter(ICalculatorUseCase calculatorUseCase, ISaveLoadUseCase loadSaveUseCase, CalculatorView calculatorView)
+        public CalculatorPresenter(ICalculator calculator, IDataManager loadSaveUseCase, CalculatorView calculatorView)
         {
-            this._calculatorUseCase = calculatorUseCase;
+            this._calculator = calculator;
             this._loadSaveUseCase = loadSaveUseCase;
             this._calculatorView = calculatorView;
         }
@@ -48,7 +48,7 @@ namespace Presenter
 
         private void Calculate()
         {
-            string calculatedValue = _calculatorUseCase.Calculate(CalculatorLine);
+            string calculatedValue = _calculator.Calculate(CalculatorLine);
             CalculatorLine = calculatedValue;
         }
     }

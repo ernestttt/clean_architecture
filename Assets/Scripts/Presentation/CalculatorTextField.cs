@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-namespace UI
+namespace Presentation
 {
     [RequireComponent(typeof(TMP_InputField))]
     public class CalculatorTextField : MonoBehaviour
