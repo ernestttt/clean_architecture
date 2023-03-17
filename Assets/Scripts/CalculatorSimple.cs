@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 
-public class Calculator : MonoBehaviour
+
+public class CalculatorSimple : MonoBehaviour
 {
     [SerializeField] private InputField _field;
     [SerializeField] private Button _button;

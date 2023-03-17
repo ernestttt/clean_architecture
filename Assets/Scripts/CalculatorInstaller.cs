@@ -15,10 +15,7 @@ public class CalculatorInstaller : MonoInstaller<CalculatorInstaller>
     {
         var dataManager = new DataManager(_saveKey);
         var calculator = new Data.Calculator(_pattern);
-
         Container.BindInterfacesAndSelfTo<CalculatorPresenter>().AsSingle().WithArguments(calculator, dataManager, _calculatorView);
-        
-
         SignalBusInstaller.Install(Container);
     }
 }
