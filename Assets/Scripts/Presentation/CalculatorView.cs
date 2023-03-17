@@ -3,7 +3,7 @@ using System;
 
 namespace Presentation
 {
-    public class CalculatorView : MonoBehaviour
+    public class CalculatorView : MonoBehaviour, ICalculatorView
     {
         [SerializeField] private CalculatorButton _button;
         [SerializeField] private CalculatorTextField _textField;
