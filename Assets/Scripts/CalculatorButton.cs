@@ -7,8 +7,6 @@ namespace Presentation
     [RequireComponent(typeof(Button))]
     public class CalculatorButton : MonoBehaviour
     {
-        ///[Inject]
-        //private ICalculatorPresenter _presenter;
         private Button _button;
 
         public event Action ButtonClicked;
