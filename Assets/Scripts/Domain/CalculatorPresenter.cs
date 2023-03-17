@@ -5,16 +5,16 @@ using Presentation;
 
 namespace Presenter
 {
-    public class CalculatorPresenter : IInitializable, IDisposable
+    public class CalculatorPresenter : IInitializable, IDisposable, IUpdatedLine
     {
-        private string _calculatorLine; 
-        private string CalculatorLine 
+        private string _updatedLine; 
+        public string UpdatedLine 
         {
-            get => _calculatorLine;
+            get => _updatedLine;
             set
             {
-                _calculatorLine = value;
-                _calculatorView?.UpdateLine(CalculatorLine);
+                _updatedLine = value;
+                _calculatorView?.UpdateLine(UpdatedLine);
             }
         }
 
@@ -35,21 +35,21 @@ namespace Presenter
         public void Initialize()
         {
             string loadedValue = _loadSaveUseCase.Load();
-            CalculatorLine = loadedValue;
+            UpdatedLine = loadedValue;
 
             _calculatorView.OnButtonClicked += Calculate;
-            _calculatorView.OnLineChanged += (line) => CalculatorLine = line;
+            _calculatorView.OnLineChanged += (line) => UpdatedLine = line;
         }
 
         public void Dispose()
         {
-            _loadSaveUseCase.Save(CalculatorLine);
+            _loadSaveUseCase.Save(UpdatedLine);
         }
 
         private void Calculate()
         {
-            string calculatedValue = _calculator.Calculate(CalculatorLine);
-            CalculatorLine = calculatedValue;
+            string calculatedValue = _calculator.Calculate(UpdatedLine);
+            UpdatedLine = calculatedValue;
         }
     }
 }
