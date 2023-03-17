@@ -19,12 +19,17 @@ public class CalculatorPresenter : IUpdatedLine
     {
         this._calculator = calculator;
         this._loadSaveUseCase = loadSaveUseCase;
+        _loadSaveUseCase.SetUpdatedLine(this);
         this._calculatorView = calculatorView;
         
         _loadSaveUseCase.StartOfApp();
 
         _calculatorView.OnButtonClicked += Calculate;
-        _calculatorView.OnLineChanged += (line) => UpdatedLine = line;
+        _calculatorView.OnLineChanged += (line) =>
+        {
+            loadSaveUseCase.UpdateLine(line);
+            UpdatedLine = line;
+        };
     }
 
     private void Calculate()

@@ -23,7 +23,7 @@ public class CalculatorCase
             int firstNumber = int.Parse(numbers[0]);
             int secondNumber = int.Parse(numbers[1]);
 
-            return _calculator.Calculate(firstNumber, secondNumber).ToString();
+            return _calculator.Sum(firstNumber, secondNumber).ToString();
         }
         else
         {

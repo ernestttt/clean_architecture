@@ -7,6 +7,11 @@ public class LoadSaveUseCase
     {
         _communicator = communicator;
     }
+
+    public void SetUpdatedLine(IUpdatedLine updatedLine)
+    {
+        _updatedLine = updatedLine;
+    }
     
     public void StartOfApp()
     {

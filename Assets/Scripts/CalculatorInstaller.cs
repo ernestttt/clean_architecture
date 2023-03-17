@@ -1,21 +1,25 @@
+using System.Collections;
 using UnityEngine;
-using Zenject;
 using Data;
-using Presenter;
 using Presentation;
 
 
-public class CalculatorInstaller : MonoInstaller<CalculatorInstaller>
+public class CalculatorInstaller : MonoBehaviour
 {
     [SerializeField] private string _saveKey;
     [SerializeField] private string _pattern;
     [SerializeField] private CalculatorView _calculatorView;
+    [SerializeField] private string _errorMessage = "Error";
 
-    public override void InstallBindings()
+    private IEnumerator Start()
     {
-        var dataManager = new DataManager(_saveKey);
-        var calculator = new Data.Calculator(_pattern);
-        Container.BindInterfacesAndSelfTo<CalculatorPresenter>().AsSingle().WithArguments(calculator, dataManager, _calculatorView);
-        SignalBusInstaller.Install(Container);
+        yield return null;
+        Calculator calculator = new Calculator();
+        CalculatorCase calculatorCase = new CalculatorCase(calculator, _pattern, _errorMessage);
+        PlayerPrefsManager playerPrefsManager = new PlayerPrefsManager();
+        DataCommunicator communicator = new DataCommunicator(_saveKey, playerPrefsManager);
+        LoadSaveUseCase loadSaveUseCase = new LoadSaveUseCase(communicator);
+        CalculatorPresenter presenter = new CalculatorPresenter(calculatorCase, loadSaveUseCase, _calculatorView);
+        
     }
 }

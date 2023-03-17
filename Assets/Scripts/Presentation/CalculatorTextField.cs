@@ -7,8 +7,6 @@ namespace Presentation
     [RequireComponent(typeof(TMP_InputField))]
     public class CalculatorTextField : MonoBehaviour
     {
-        //[Inject]
-        //private ICalculatorPresenter _presenter;
         private TMP_InputField _inputField;
 
         public event Action<string> ValueChanged;
