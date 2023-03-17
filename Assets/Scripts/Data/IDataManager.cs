@@ -1,8 +1,5 @@
-namespace Data
+public interface IDataManager
 {
-    public interface IDataManager
-    {
-        public string Load();
-        public void Save(string value);
-    }
+    public object Load(string key);
+    public void Save(string key,object value);
 }

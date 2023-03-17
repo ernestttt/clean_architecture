@@ -4,6 +4,7 @@ public class CalculatorPresenter : IUpdatedLine
     private ICalculatorView _calculatorView;
     private CalculatorCase _calculator;
     private string _updatedLine; 
+    
     public string UpdatedLine 
     {
         get => _updatedLine;

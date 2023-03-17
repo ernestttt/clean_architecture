@@ -1,5 +1,3 @@
-using Data;
-
 public class LoadSaveUseCase
 {
     private IDataCommunicator _communicator;
